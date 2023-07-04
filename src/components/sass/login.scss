@@ -38,6 +38,12 @@
       font-family: myFont;
       font-size: 2rem;
       font-weight: 600;
+      text-decoration: underline;
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
 
     &__right {
