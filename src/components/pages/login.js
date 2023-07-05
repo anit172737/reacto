@@ -2,8 +2,30 @@ import React from "react";
 import img1 from "../../assets/images/1.png";
 import "../sass/login.scss";
 import { useForm, Controller } from "react-hook-form";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
+  const defaultValues = {
+    email: "",
+    password: "",
+  };
+
+  const {
+    reset,
+    control,
+    setError,
+    setValue,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues });
+
+  const onSubmit = (data) => {
+    if (data.email === "anit@gmail.com" && data.password === "anit@123") {
+      localStorage.setItem("token", "aniii");
+      // Navigate('/home')
+    }
+  };
   return (
     <div className="form">
       <div className="form__container">
@@ -18,20 +40,19 @@ const Login = () => {
         <div className="form__container__right">
           <form
             className="form__container__right-sec"
-            // onSubmit={form__containerik.handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <h1 className="form__container__right-heading">Login</h1>
             <div>
               <Controller
                 id="email"
+                name="email"
                 control={control}
                 render={({ field }) => (
-                  <Input
+                  <input
                     className="form__container__right-input"
                     type="email"
-                    name="loginMail"
                     placeholder="Enter Email"
-                    // onChange={(e) => setValue('loginMail', e.target.value)}
                     {...field}
                   />
                 )}
@@ -39,13 +60,13 @@ const Login = () => {
             </div>
             <div>
               <Controller
-                id="email"
+                id="password"
+                name="password"
                 control={control}
                 render={({ field }) => (
-                  <Input
+                  <input
                     className="form__container__right-input"
                     type="password"
-                    name="loginPass"
                     placeholder="Enter Password"
                     // onChange={(e) => setValue('loginMail', e.target.value)}
                     {...field}
