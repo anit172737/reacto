@@ -1,14 +1,13 @@
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const PrivateRoute = ({ path, ...props }) => {
+const PrivateRoute = (props) => {
   const isAuthenticated = localStorage.getItem("token");
 
-  return isAuthenticated ? (
-    <Route path={path} {...props} />
-  ) : (
-    <Navigate to="/" replace />
-  );
+  if (isAuthenticated) {
+    return props.children;
+  }
+  return <Navigate to="/" replace />;
 };
 
 export default PrivateRoute;

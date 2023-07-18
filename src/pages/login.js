@@ -1,10 +1,12 @@
-import React from "react";
-import img1 from "../../assets/images/1.png";
+import React, { useEffect } from "react";
+import img1 from "../assets/images/1.png";
 import "../sass/login.scss";
 import { useForm, Controller } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { emailRegex, passwordRegex } from "../utility/utils";
 
 const Login = () => {
+  const navigate = useNavigate();
   const defaultValues = {
     email: "",
     password: "",
@@ -23,9 +25,15 @@ const Login = () => {
   const onSubmit = (data) => {
     if (data.email === "anit@gmail.com" && data.password === "anit@123") {
       localStorage.setItem("token", "aniii");
-      // Navigate('/home')
+      navigate("/home");
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/home");
+    }
+  });
   return (
     <div className="form">
       <div className="form__container">
@@ -53,10 +61,18 @@ const Login = () => {
                     className="form__container__right-input"
                     type="email"
                     placeholder="Enter Email"
+                    {...register("email", {
+                      required: "Please enter email address",
+                      pattern: {
+                        value: emailRegex,
+                        message: "Please enter valid email address",
+                      },
+                    })}
                     {...field}
                   />
                 )}
               />
+              {errors && errors.email && <div>{errors.email.message}</div>}
             </div>
             <div>
               <Controller
@@ -68,31 +84,40 @@ const Login = () => {
                     className="form__container__right-input"
                     type="password"
                     placeholder="Enter Password"
-                    // onChange={(e) => setValue('loginMail', e.target.value)}
+                    {...register("password", {
+                      required: "Please enter password",
+                      // pattern: {
+                      //   value: passwordRegex,
+                      //   message: "Please enter valid password",
+                      // },
+                    })}
                     {...field}
                   />
                 )}
               />
+              {errors && errors.password && (
+                <div>{errors.password.message}</div>
+              )}
             </div>
             <input
               className="form__container__right-btn"
               type="submit"
               value="Login"
             />
-            <div style={{ display: "grid", justifyContent: "center" }}>
-              <div style={{ color: "#2f2e47" }}>
-                Not a member?
-                <span style={{ paddingLeft: "10px" }}>
-                  <button
-                    className="form__container__sign-btn"
-                    //   onClick={()=> history.push('/signup')}
-                  >
-                    SignUp
-                  </button>
-                </span>
-              </div>
-            </div>
           </form>
+          <div style={{ display: "grid", justifyContent: "center" }}>
+            <div style={{ color: "#2f2e47" }}>
+              Not a member?
+              <span style={{ paddingLeft: "10px" }}>
+                <button
+                  className="form__container__sign-btn"
+                  //   onClick={()=> history.push('/signup')}
+                >
+                  Register
+                </button>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
