@@ -1,0 +1,19 @@
+@import "../../mixins.scss";
+@import "../../base";
+
+.interviewQ {
+  @include container;
+  gap: 20px;
+
+  &_sec {
+    // background-color: rgb(237, 237, 237);
+    background-color: $color-primary-light;
+    // background-image: linear-gradient(
+    //   to left,
+    //   $color-primary-light-1,
+    //   rgb(237, 237, 237)
+    // );
+    border-radius: 10px;
+    padding: 0px 20px 9px;
+  }
+}

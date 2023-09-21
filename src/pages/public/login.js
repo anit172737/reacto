@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import img1 from "../assets/images/1.png";
-import "../sass/login.scss";
+import img1 from "../../assets/images/1.png";
+import "../../sass/pages/public/login.scss";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { emailRegex, passwordRegex } from "../utility/utils";
+import { emailRegex, passwordRegex } from "../../utility/utils";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,14 +28,22 @@ const Login = () => {
     if (data.email === "anit@gmail.com" && data.password === "anit@123") {
       localStorage.setItem("token", "aniii");
       navigate("/home");
+    } else {
+      toast.error(
+        <div style={{ fontSize: "18px", fontFamily: "myFont" }}>
+          Invalid userid or password
+        </div>
+      );
     }
   };
 
-  useEffect(() => {
+  const nav = () => {
     if (localStorage.getItem("token")) {
       navigate("/home");
     }
-  });
+  };
+
+  useEffect(nav, []);
   return (
     <div className="form">
       <div className="form__container">
@@ -72,7 +82,11 @@ const Login = () => {
                   />
                 )}
               />
-              {errors && errors.email && <div>{errors.email.message}</div>}
+              {errors && errors.email && (
+                <div style={{ fontSize: "18px", color: "orangered" }}>
+                  {errors.email.message}
+                </div>
+              )}
             </div>
             <div>
               <Controller
@@ -96,7 +110,9 @@ const Login = () => {
                 )}
               />
               {errors && errors.password && (
-                <div>{errors.password.message}</div>
+                <div style={{ fontSize: "18px", color: "orangered" }}>
+                  {errors.password.message}
+                </div>
               )}
             </div>
             <input
@@ -118,6 +134,7 @@ const Login = () => {
               </span>
             </div>
           </div>
+          <ToastContainer theme="dark" />
         </div>
       </div>
     </div>

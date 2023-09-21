@@ -8,6 +8,7 @@ import { router } from "./routes/router";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
+
   <Suspense fallback="...Loading">
     <RouterProvider router={router} />
   </Suspense>

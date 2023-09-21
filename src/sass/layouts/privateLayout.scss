@@ -1,0 +1,18 @@
+@import "../base";
+
+.privateLayout {
+  height: 100vh;
+  padding: 15px;
+
+  &_container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-auto-flow: column;
+    gap: 30px;
+    padding: 15px;
+    font-size: 22px;
+    background-color: $color-primary-light;
+    border-radius: 20px;
+  }
+}
