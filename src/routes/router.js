@@ -2,7 +2,6 @@ import React, { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./privateRoute";
 import PrivateLayout from "../layouts/privateLayout";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const LazyLogin = lazy(() => import("../pages/public/login"));
@@ -27,9 +26,9 @@ export const router = createBrowserRouter([
   },
   {
     element: (
-      <PrivateLayout>
-        <PrivateRoute />
-      </PrivateLayout>
+      <PrivateRoute>
+        <PrivateLayout />
+      </PrivateRoute>
     ),
     children: [
       { element: <LazyHome />, path: "/home" },

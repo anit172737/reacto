@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is React ?",
+    "answer": "React, sometimes reffered to as a frontend JavaScript framework, is a JavaScript library created by Facebook. React is a tool for building UI components."
+  },
+  {
+    "question": "what is JSX ?",
+    "answer": "JSX stand for Javascript and XML, it is a syntax extension for javascript. JSX allows us to write HTML like code in javascript."
+  },
+  {
+    "question": "In react is it possible to pass data from child to parent ?",
+    "answer": "Yes it is, first pass the function as a prop to child component, then call a function in the child component and pass data as argument, then access the data in the parent."
+  },
+  {
+    "question": "what is DOM ?",
+    "answer": "DOM stands for Document Object Model, it is a structural representation of HTML element."
+  },
+  {
+    "question": "what is Virtual DOM ?",
+    "answer": "Virtual DOM is a light weight copy of real DOM or virtual copy of real DOM. when any state changes in a component the virtual DOM is created. new virtual DOM is compares with previous virtual DOM, this process is called as DOM diffing and only re-renderes the updated elements/nodes."
+  },
+  {
+    "question": "what is HOC ?",
+    "answer": "HOC stands for Higher Order Component. it is a advanced technique of reusing component functionality logic. it is simply takes original component and returns enhanced component."
+  },
+  {
+    "question": "what is Render Prop ?",
+    "answer": "It is a technique to share code between react component using a props whose value is a function."
+  },
+  {
+    "question": "what is useRef Hook ?",
+    "answer": "The useRef is a hook that allows us to directly create a reference to the DOM element in the functional component."
+  },
+  {
+    "question": "what is fragments ?",
+    "answer": "Fragments allows us to group a list of child elements without adding extra node to DOM."
+  },
+  {
+    "question": "what is Controlled and Uncontrolled component ?",
+    "answer": "In Controlled component form data handled by react component and in Uncontrolled component form data handle by DOM itself."
+  }
+]

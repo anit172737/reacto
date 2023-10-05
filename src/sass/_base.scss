@@ -7,8 +7,8 @@ $color-secondary: #ec0063;
 $color-ternory: #e8165d;
 
 ::-webkit-scrollbar {
-  width: 0.7vw;
-  height: 0.7vw;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: $color-primary;

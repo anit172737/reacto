@@ -46,6 +46,16 @@ const Menu = [
     dropIcon: <ChevronDown size={22} />,
     children: [
       {
+        url: "html-react",
+        icon: <Layers size={18} />,
+        navName: "HTML",
+      },
+      {
+        url: "css-react",
+        icon: <Layers size={18} />,
+        navName: "CSS",
+      },
+      {
         url: "/interview-javascript",
         icon: <Layers size={18} />,
         navName: "Javascript",

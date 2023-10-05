@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../../sass/pages/private/interviewQ.scss";
-import menu from "./interview.json";
+import menu from "./menuReact.json";
 import Header from "../../../components/header";
 import { searchFunction } from "../../../utility/helperFunctions";
 
