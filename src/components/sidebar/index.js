@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import "../../sass/components/sidebar.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Menu from "./sidebarMenu";
 
 const Sidebar = () => {
   const [drop, setDrop] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+    localStorage.clear();
+  };
 
   const handleDrop = (name) => {
     if (name === "Components") {
@@ -80,6 +86,9 @@ const Sidebar = () => {
           );
         })}
       </div>
+      <p className="sidebar_p" onClick={handleLogout}>
+        logout
+      </p>
     </div>
   );
 };

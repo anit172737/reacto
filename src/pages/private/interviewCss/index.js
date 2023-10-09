@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../../../sass/pages/private/interviewQ.scss";
-import Menu from "./menuJavascript";
-import Header from "../../../components/header";
+import Menu from "./menuCss";
 import { searchFunction } from "../../../utility/helperFunctions";
+import Header from "../../../components/header";
 import { PlayCircle, PauseCircle } from "react-feather";
 import Speech from "speak-tts";
 
-const InterviewJavascript = () => {
+const Css = () => {
   const [search, setSearch] = useState("");
   const [speaking, setSpeaking] = useState(false);
 
@@ -81,7 +81,7 @@ const InterviewJavascript = () => {
 
   return (
     <div className="interviewQ">
-      <Header title="Javascript Interview Questions" setSearch={setSearch} />
+      <Header title="CSS Interview Questions" setSearch={setSearch} />
       {searchMenu.length !== 0 ? (
         searchMenu.map((qtn) => {
           return (
@@ -121,4 +121,4 @@ const InterviewJavascript = () => {
   );
 };
 
-export default InterviewJavascript;
+export default Css;

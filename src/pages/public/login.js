@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex } from "../../utility/utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GoogleLoginBtn from "../../components/googleLoginBtn";
+import GoogleLogoutBtn from "../../components/googleLogoutBtn";
+import { gapi } from "gapi-script";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,7 +46,20 @@ const Login = () => {
     }
   };
 
+  const clientId =
+    "1014433680425-9qjpd7cmkgtvhsdamvv762ploeb3baer.apps.googleusercontent.com";
+  const start = () => {
+    gapi.client.init({
+      clientId: clientId,
+      scope: "",
+    });
+  };
+
   useEffect(nav, []);
+
+  useEffect(() => {
+    gapi.load("client:auth2", start);
+  }, []);
   return (
     <div className="form">
       <div className="form__container">
@@ -134,6 +150,7 @@ const Login = () => {
               </span>
             </div>
           </div>
+          <GoogleLoginBtn />
           <ToastContainer theme="dark" />
         </div>
       </div>

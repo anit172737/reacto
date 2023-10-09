@@ -18,6 +18,8 @@ const LazyInterviewReact = lazy(() =>
 const LazyInterviewJavascript = lazy(() =>
   import("../pages/private/interviewJavascript")
 );
+const LazyInterviewCss = lazy(() => import("../pages/private/interviewCss"));
+const LazyInterviewHtml = lazy(() => import("../pages/private/interviewHtml"));
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +42,8 @@ export const router = createBrowserRouter([
       { element: <LazyClass />, path: "/class-component" },
       { element: <LazyInterviewReact />, path: "/interview-react" },
       { element: <LazyInterviewJavascript />, path: "/interview-javascript" },
+      { element: <LazyInterviewCss />, path: "/interview-css" },
+      { element: <LazyInterviewHtml />, path: "/interview-html" },
     ],
   },
 ]);
