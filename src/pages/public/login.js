@@ -28,7 +28,8 @@ const Login = () => {
   } = useForm({ defaultValues });
 
   const onSubmit = (data) => {
-    if (data.email === "anit@gmail.com" && data.password === "anit@123") {
+    if (data.email === "anit@gmail.com" && data.password === "Anit@123") {
+      console.log("data.password", data.password);
       localStorage.setItem("token", "aniii");
       navigate("/home");
     } else {
@@ -116,15 +117,27 @@ const Login = () => {
                     placeholder="Enter Password"
                     {...register("password", {
                       required: "Please enter password",
-                      // pattern: {
-                      //   value: passwordRegex,
-                      //   message: "Please enter valid password",
-                      // },
+                      pattern: {
+                        value: passwordRegex,
+                        message: "Please enter valid password",
+                      },
                     })}
                     {...field}
                   />
                 )}
               />
+              <p
+                style={{
+                  fontSize: "14px",
+                  paddingTop: "8px",
+                  lineHeight: "14px",
+                  width: "30rem",
+                }}
+              >
+                ( Password between 8 to 15 characters which contain alteast one
+                uppercase letter, one lowercase letter, one special character
+                and one numeric digit.)
+              </p>
               {errors && errors.password && (
                 <div style={{ fontSize: "18px", color: "orangered" }}>
                   {errors.password.message}

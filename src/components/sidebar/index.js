@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../sass/components/sidebar.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import Menu from "./sidebarMenu";
 
 const Sidebar = () => {
+  const [data, setData] = useState(Menu);
   const [drop, setDrop] = useState(false);
   const navigate = useNavigate();
 
@@ -13,13 +14,24 @@ const Sidebar = () => {
   };
 
   const handleDrop = (name) => {
-    if (name === "Components") {
-      setDrop(!drop);
-      console.log("first");
-    } else if (name === "Interview") {
-      setDrop(!drop);
+    for (let x in data) {
+      if (data[x].navName === name) {
+        setDrop(!drop);
+        data[x].dropdown = !data[x].dropdown;
+        if (drop === false) {
+          navigate("/home");
+        }
+      } else {
+        // setDrop(!drop);
+        data[x].dropdown = false;
+      }
     }
   };
+
+  useEffect(() => {
+    console.log("data", data);
+    console.log("drop", drop);
+  }, [drop]);
 
   return (
     <div className="sidebar">
@@ -30,7 +42,7 @@ const Sidebar = () => {
         >
           ☣ <span style={{ fontSize: "30px" }}>Reacto</span>
         </NavLink>
-        {Menu.map((data, index) => {
+        {data.map((data, index) => {
           return (
             <>
               {data.url ? (
@@ -42,7 +54,7 @@ const Sidebar = () => {
                       ? "sidebar__nav--navlink-active"
                       : "sidebar__nav--navlink"
                   }
-                  onClick={() => handleDrop(data.navName)}
+                  // onClick={() => handleDrop(data.navName)}
                 >
                   {data.icon} {data.navName}{" "}
                   {data.children ? data.dropIcon : ""}
@@ -57,10 +69,10 @@ const Sidebar = () => {
                 </div>
               )}
 
-              {data.children && (
+              {data.dropdown && (
                 <div
                   className={
-                    drop
+                    data.dropdown
                       ? "sidebar__nav--dropdown"
                       : "sidebar__nav--dropdown-no"
                   }
