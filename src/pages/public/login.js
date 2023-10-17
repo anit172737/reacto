@@ -9,8 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 import GoogleLoginBtn from "../../components/googleLoginBtn";
 import GoogleLogoutBtn from "../../components/googleLogoutBtn";
 import { gapi } from "gapi-script";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Login = () => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
   const defaultValues = {
     email: "",
@@ -27,17 +30,19 @@ const Login = () => {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const onSubmit = (data) => {
-    if (data.email === "anit@gmail.com" && data.password === "Anit@123") {
-      console.log("data.password", data.password);
-      localStorage.setItem("token", "aniii");
-      navigate("/home");
-    } else {
-      toast.error(
-        <div style={{ fontSize: "18px", fontFamily: "myFont" }}>
-          Invalid userid or password
-        </div>
-      );
+  const onSubmit = async (data) => {
+    try {
+      const res = await axios.post(baseUrl + "/login", data);
+      console.log("res", res);
+      if (!res.data.error) {
+        navigate("/home");
+        Cookies.set("token", res.data.token);
+        localStorage.setItem("token", res.data.token);
+      } else {
+        toast.error(res.data.error);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -156,7 +161,7 @@ const Login = () => {
               <span style={{ paddingLeft: "10px" }}>
                 <button
                   className="form__container__sign-btn"
-                  //   onClick={()=> history.push('/signup')}
+                  onClick={() => navigate("/signup")}
                 >
                   Register
                 </button>

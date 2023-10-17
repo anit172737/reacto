@@ -1,5 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "../app.config";
+import { toast, ToastContainer } from "react-toastify";
 
 const privateRequest = axios.create({
   baseURL: baseUrl,
@@ -19,6 +20,10 @@ privateRequest.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+const clearToken = () => {
+  localStorage.clear();
+};
 
 const responseErrorHandler = (error) => {
   if (error.response) {
@@ -55,6 +60,7 @@ export const privateGet = (endPoint) => {
 };
 
 export const privatePost = (endPoint, data) => {
+  console.log("data", data);
   return privateRequest.post(endPoint, data);
 };
 

@@ -5,6 +5,7 @@ import PrivateLayout from "../layouts/privateLayout";
 import "react-toastify/dist/ReactToastify.css";
 
 const LazyLogin = lazy(() => import("../pages/public/login"));
+const LazySignup = lazy(() => import("../pages/public/signup"));
 const LazyHome = lazy(() => import("../pages/private/home"));
 const LazyIntro = lazy(() => import("../pages/private/intro"));
 const LazyJsx = lazy(() => import("../pages/private/jsx"));
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <LazyLogin />,
+  },
+  {
+    path: "/signup",
+    element: <LazySignup />,
   },
   {
     element: (
