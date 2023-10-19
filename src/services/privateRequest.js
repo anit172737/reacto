@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "../app.config";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, Toaster } from "react-hot-toast";
 
 const privateRequest = axios.create({
   baseURL: baseUrl,

@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import img1 from "../../assets/images/1.png";
 import "../../sass/pages/public/login.scss";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex } from "../../utility/utils";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast, Toaster } from "react-hot-toast";
 import GoogleLoginBtn from "../../components/googleLoginBtn";
-import GoogleLogoutBtn from "../../components/googleLogoutBtn";
 import { gapi } from "gapi-script";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -35,7 +33,10 @@ const Login = () => {
       const res = await axios.post(baseUrl + "/login", data);
       console.log("res", res);
       if (!res.data.error) {
-        navigate("/home");
+        toast.success(res.data.message, { duration: 1000 });
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
         Cookies.set("token", res.data.token);
         localStorage.setItem("token", res.data.token);
       } else {
@@ -131,20 +132,8 @@ const Login = () => {
                   />
                 )}
               />
-              <p
-                style={{
-                  fontSize: "14px",
-                  paddingTop: "8px",
-                  lineHeight: "14px",
-                  width: "30rem",
-                }}
-              >
-                ( Password between 8 to 15 characters which contain alteast one
-                uppercase letter, one lowercase letter, one special character
-                and one numeric digit.)
-              </p>
               {errors && errors.password && (
-                <div style={{ fontSize: "18px", color: "orangered" }}>
+                <div className="form__container__error">
                   {errors.password.message}
                 </div>
               )}
@@ -155,21 +144,23 @@ const Login = () => {
               value="Login"
             />
           </form>
-          <div style={{ display: "grid", justifyContent: "center" }}>
-            <div style={{ color: "#2f2e47" }}>
-              Not a member?
-              <span style={{ paddingLeft: "10px" }}>
-                <button
-                  className="form__container__sign-btn"
-                  onClick={() => navigate("/signup")}
-                >
-                  Register
-                </button>
-              </span>
-            </div>
+          <div className="form__container__or">
+            <hr className="form__container__or-hr" />
+            <h5 className="form__container__or-h5">OR</h5>
+            <hr className="form__container__or-hr" />
           </div>
+
           <GoogleLoginBtn />
-          <ToastContainer theme="dark" />
+          <div className="form__container__sign">
+            Not a member?
+            <button
+              className="form__container__sign-btn"
+              onClick={() => navigate("/signup")}
+            >
+              Register
+            </button>
+          </div>
+          <Toaster />
         </div>
       </div>
     </div>

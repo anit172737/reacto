@@ -2,7 +2,6 @@ import React, { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./privateRoute";
 import PrivateLayout from "../layouts/privateLayout";
-import "react-toastify/dist/ReactToastify.css";
 
 const LazyLogin = lazy(() => import("../pages/public/login"));
 const LazySignup = lazy(() => import("../pages/public/signup"));

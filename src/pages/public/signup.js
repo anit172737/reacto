@@ -1,31 +1,45 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import Cookies from "js-cookie";
+import img1 from "../../assets/images/1.png";
 import "../../sass/pages/public/login.scss";
+import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { emailRegex, passwordRegex } from "../../utility/utils";
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 const Signup = () => {
+  const [loading, setLoading] = useState(false);
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
-  const [user, setUser] = useState({
+  const navigate = useNavigate();
+  const defaultValues = {
     email: "",
     password: "",
-  });
+  };
 
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const handleSignup = async () => {
+  const {
+    reset,
+    control,
+    setError,
+    setValue,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues });
+
+  const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.post(baseUrl + "/signup", user);
-      console.log("user", user);
+      const response = await axios.post(baseUrl + "/signup", data);
+      // console.log("user", user);
       console.log("response", response.data);
       if (!response.data.error) {
-        navigate("/");
-        toast.success(response.data.message);
+        toast.success(response.data.message, { duration: 1000 });
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       } else {
         navigate("/signup");
-        toast.error(response.data.error);
+        toast.error(response.data.error, { duration: 1000 });
       }
     } catch (error) {
       //   toast.error(error.response.data.error);
@@ -36,59 +50,105 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    const tok = Cookies.get("token");
+    const tok = localStorage.getItem("token");
     if (tok) {
-      navigate("/dashboard");
+      navigate("/home");
     }
   }, []);
   return (
-    <div
-      className="signup"
-      style={{
-        display: "grid",
-        justifyContent: "center",
-        justifyItems: "center",
-        alignContent: "center",
-        gap: "10px",
-        height: "100vh",
-      }}
-    >
-      Signup
-      <div style={{ display: "grid" }}>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="text"
-          //   value={user.email}
-          placeholder="enter email"
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        />
+    <div className="form">
+      <div className="form__container">
+        <div className="form__container__left">
+          <img
+            className="form__container__left-img"
+            src={img1}
+            alt="login-img"
+          ></img>
+        </div>
+
+        <div className="form__container__right">
+          <form
+            className="form__container__right-sec"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <h1 className="form__container__right-heading">Register</h1>
+            <div>
+              <Controller
+                id="email"
+                name="email"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="form__container__right-input"
+                    type="email"
+                    placeholder="Enter Email"
+                    {...register("email", {
+                      required: "Please enter email address",
+                      pattern: {
+                        value: emailRegex,
+                        message: "Please enter valid email address",
+                      },
+                    })}
+                    {...field}
+                  />
+                )}
+              />
+              {errors && errors.email && (
+                <div style={{ fontSize: "18px", color: "orangered" }}>
+                  {errors.email.message}
+                </div>
+              )}
+            </div>
+            <div>
+              <Controller
+                id="password"
+                name="password"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    className="form__container__right-input"
+                    type="password"
+                    placeholder="Enter Password"
+                    {...register("password", {
+                      required: "Please enter password",
+                      pattern: {
+                        value: passwordRegex,
+                        message: "Please enter valid password",
+                      },
+                    })}
+                    {...field}
+                  />
+                )}
+              />
+              <p className="form__container__p">
+                (Password between 8 to 15 characters which contain alteast one
+                uppercase letter, one lowercase letter, one special character
+                and one numeric digit. )
+              </p>
+              {errors && errors.password && (
+                <div className="form__container__error">
+                  {errors.password.message}
+                </div>
+              )}
+            </div>
+            <input
+              className="form__container__right-btn"
+              type="submit"
+              value="Register"
+            />
+          </form>
+          <div className="form__container__sign">
+            Already registered?
+            <button
+              className="form__container__sign-btn"
+              onClick={() => navigate("/")}
+            >
+              Login
+            </button>
+          </div>
+          <Toaster />
+        </div>
       </div>
-      <div style={{ display: "grid" }}>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          //   value={user.password}
-          placeholder="enter password"
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
-      </div>
-      <input
-        type="button"
-        value={loading ? "Processing..." : "Submit"}
-        onClick={handleSignup}
-      />
-      <input
-        type="button"
-        value="Go to login page"
-        onClick={() => navigate("/")}
-      />
-      <ToastContainer
-        theme="dark"
-        className="toaster"
-        style={{ fontSize: "17px" }}
-      />
     </div>
   );
 };

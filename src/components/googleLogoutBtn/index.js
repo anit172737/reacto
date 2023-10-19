@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { GoogleLogout } from "react-google-login";
+import { LoginContext } from "../../utility/loginContext";
+import { useNavigate } from "react-router-dom";
+import "../../sass/pages/public/login.scss";
 
 const GoogleLogoutBtn = () => {
+  const { setGoogleLogin, setUser } = useContext(LoginContext);
+  const navigate = useNavigate();
   const clientId =
     "1014433680425-9qjpd7cmkgtvhsdamvv762ploeb3baer.apps.googleusercontent.com";
+
   const onSuccess = (res) => {
     console.log("Logout Success!");
+    setUser("");
+    localStorage.clear();
+    navigate("/");
+    setGoogleLogin(false);
   };
 
   return (
-    <div>
+    <>
       <GoogleLogout
         clientId={clientId}
         buttonText="Logout"
         onLogoutSuccess={onSuccess}
+        className="googleLogout"
       />
-    </div>
+    </>
   );
 };
 

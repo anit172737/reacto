@@ -1,10 +1,20 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import "../sass/layouts/privateLayout.scss";
 import Sidebar from "../components/sidebar";
 import { Audio } from "react-loader-spinner";
+import { LoginContext } from "../utility/loginContext";
 
 const PrivateLayout = () => {
+  const { setGoogleLogin, user } = useContext(LoginContext);
+  console.log("user", user);
+  useEffect(() => {
+    if (user !== "") {
+      setGoogleLogin(true);
+    } else {
+      setGoogleLogin(false);
+    }
+  }, []);
   return (
     <div className="privateLayout">
       <div className="privateLayout_container">
@@ -17,6 +27,7 @@ const PrivateLayout = () => {
             boxShadow: "0 8px 25px -8px #82868b",
             borderRadius: "15px",
             backgroundColor: "white",
+            // backgroundColor: "#2f2e47",
             overflow: "auto",
           }}
         >

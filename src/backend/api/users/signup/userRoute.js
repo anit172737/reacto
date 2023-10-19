@@ -44,9 +44,6 @@ app.post("/api/signup", async (req, res) => {
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    // const reqBody = await request.json();
-    // const { email, password } = reqBody;
-
     //check user is exist or not
     const user = await User.findOne({ email });
     if (!user) {
@@ -78,6 +75,58 @@ app.post("/api/login", async (req, res) => {
     });
 
     // response.cookies.set("token", token, { httpOnly: true });
+    return response;
+  } catch (error) {
+    return res.json({ error: error.message, status: 500 });
+  }
+});
+
+app.post("/api/googleLogin", async (req, res) => {
+  const { email } = req.body;
+  try {
+    //check user is exist or not
+    const user = await User.findOne({ email });
+    if (!user) {
+      // return res.json({ error: "User not exist", status: 400 });
+      const newUser = new User({
+        email,
+        password: "123",
+      });
+      const userData = {
+        email: email,
+      };
+
+      const token = await jwt.sign(userData, "fullstack", {
+        expiresIn: "1d",
+      });
+      const savedUser = await newUser.save();
+
+      console.log("savedUser", savedUser);
+      return res.json({
+        message: "User successfully created!",
+        status: 201,
+        token: token,
+      });
+    }
+
+    const userData = {
+      id: user._id,
+      email: user.email,
+    };
+
+    //create token
+    const token = await jwt.sign(userData, "fullstack", {
+      expiresIn: "1d",
+    });
+
+    const response = res.json({
+      message: "Login successful",
+      success: true,
+      status: 201,
+      token: token,
+      userData: userData,
+    });
+
     return response;
   } catch (error) {
     return res.json({ error: error.message, status: 500 });
