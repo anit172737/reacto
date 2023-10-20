@@ -38,7 +38,9 @@ const Login = () => {
           navigate("/home");
         }, 1000);
         Cookies.set("token", res.data.token);
+        // setInterval(() => {
         localStorage.setItem("token", res.data.token);
+        // }, 1000);
       } else {
         toast.error(res.data.error);
       }

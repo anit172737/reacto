@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
 
     //create token
     const token = await jwt.sign(userData, "fullstack", {
-      expiresIn: "1d",
+      expiresIn: "1m",
     });
 
     const response = res.json({
