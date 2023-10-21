@@ -33,11 +33,11 @@ const Login = () => {
       const res = await axios.post(baseUrl + "/login", data);
       console.log("res", res);
       if (!res.data.error) {
-        toast.success(res.data.message, { duration: 1000 });
+        toast.success(res.data.message);
         setTimeout(() => {
           navigate("/home");
         }, 1000);
-        Cookies.set("token", res.data.token);
+        // Cookies.set("token", res.data.token);
         // setInterval(() => {
         localStorage.setItem("token", res.data.token);
         // }, 1000);
@@ -85,7 +85,9 @@ const Login = () => {
             className="form__container__right-sec"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h1 className="form__container__right-heading">Login</h1>
+            <h1 className="form__container__right-heading">
+              <span>Welcome to</span> Reacto
+            </h1>
             <div>
               <Controller
                 id="email"

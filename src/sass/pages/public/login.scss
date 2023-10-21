@@ -99,9 +99,15 @@
       &-heading {
         text-align: center;
         color: $color-primary-dark;
+        font-size: 35px;
         // height: 70px;
         line-height: 40px;
         padding-bottom: 20px;
+
+        span {
+          font-size: 30px;
+          font-weight: 400;
+        }
       }
 
       &-input {

@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useRef } from "react";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router";
 import { LoginContext } from "./utility/loginContext";
@@ -7,9 +7,10 @@ import { Audio } from "react-loader-spinner";
 const App = () => {
   const [googleLogin, setGoogleLogin] = useState(false);
   const [user, setUser] = useState("");
+  const googleLogoutRef = useRef(null);
   return (
     <LoginContext.Provider
-      value={{ googleLogin, setGoogleLogin, user, setUser }}
+      value={{ googleLogin, setGoogleLogin, user, setUser, googleLogoutRef }}
     >
       <div
         style={{

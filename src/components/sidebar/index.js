@@ -1,17 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../sass/components/sidebar.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import Menu from "./sidebarMenu";
-import { LoginContext } from "../../utility/loginContext";
 import GoogleLogoutBtn from "../googleLogoutBtn";
 
 const Sidebar = () => {
   const [data, setData] = useState(Menu);
   const [drop, setDrop] = useState(false);
-  const { googleLogin, user } = useContext(LoginContext);
-
-  console.log("googleLogin", googleLogin);
-  const navigate = useNavigate();
 
   const handleDrop = (name) => {
     for (let x in data) {
@@ -81,6 +76,7 @@ const Sidebar = () => {
                   {data.children.map((child) => {
                     return (
                       <NavLink
+                        key={child.navName}
                         to={child.url}
                         className={({ isActive }) =>
                           isActive

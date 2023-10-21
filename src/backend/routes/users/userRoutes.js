@@ -87,7 +87,7 @@ router.post("/googleLogin", async (req, res) => {
       };
 
       const token = await jwt.sign(userData, "fullstack", {
-        expiresIn: "1d",
+        expiresIn: "1h",
       });
       const savedUser = await newUser.save();
 
