@@ -1,24 +1,14 @@
 import React, { Suspense, useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import "../sass/layouts/privateLayout.scss";
-import Sidebar from "../components/sidebar";
 import { Audio } from "react-loader-spinner";
-import { LoginContext } from "../utility/loginContext";
+import AdminSidebar from "../components/adminSidebar";
 
-const PrivateLayout = () => {
-  // const { setGoogleLogin, user } = useContext(LoginContext);
-  // console.log("user", user);
-  // useEffect(() => {
-  //   if (user !== "") {
-  //     setGoogleLogin(true);
-  //   } else {
-  //     setGoogleLogin(false);
-  //   }
-  // }, []);
+const AdminLayout = () => {
   return (
     <div className="privateLayout">
       <div className="privateLayout_container">
-        <Sidebar />
+        <AdminSidebar />
         <div
           style={{
             display: "grid",
@@ -50,4 +40,4 @@ const PrivateLayout = () => {
   );
 };
 
-export default PrivateLayout;
+export default AdminLayout;

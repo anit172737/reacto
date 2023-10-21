@@ -2,6 +2,8 @@ import React, { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./privateRoute";
 import PrivateLayout from "../layouts/privateLayout";
+import AdminRoute from "./adminRoute";
+import AdminLayout from "../layouts/adminLayout";
 
 const LazyLogin = lazy(() => import("../pages/public/login"));
 const LazySignup = lazy(() => import("../pages/public/signup"));
@@ -20,6 +22,8 @@ const LazyInterviewJavascript = lazy(() =>
 );
 const LazyInterviewCss = lazy(() => import("../pages/private/interviewCss"));
 const LazyInterviewHtml = lazy(() => import("../pages/private/interviewHtml"));
+
+const LazyDashboard = lazy(() => import("../pages/admin/dashboard"));
 
 export const router = createBrowserRouter([
   {
@@ -49,5 +53,14 @@ export const router = createBrowserRouter([
       { element: <LazyInterviewCss />, path: "/interview-css" },
       { element: <LazyInterviewHtml />, path: "/interview-html" },
     ],
+  },
+
+  {
+    element: (
+      <AdminRoute>
+        <AdminLayout />
+      </AdminRoute>
+    ),
+    children: [{ element: <LazyDashboard />, path: "/dashboard" }],
   },
 ]);

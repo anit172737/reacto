@@ -6,7 +6,7 @@ import { Audio } from "react-loader-spinner";
 
 const App = () => {
   const [googleLogin, setGoogleLogin] = useState(false);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
   const googleLogoutRef = useRef(null);
   return (
     <LoginContext.Provider

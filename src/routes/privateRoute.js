@@ -7,7 +7,6 @@ import { handleLogout } from "../utility/helperFunctions";
 
 const PrivateRoute = (props) => {
   const [token, setToken] = useState(true);
-  const { setGoogleLogin, setUser } = useContext(LoginContext);
   const isAuthenticated = localStorage.getItem("token");
 
   const parseJwt = (token) => {
@@ -21,7 +20,7 @@ const PrivateRoute = (props) => {
   setTimeout(() => {
     setToken(false);
     handleLogout();
-  }, 10000);
+  }, 3600000);
 
   function isTokenExpired(token) {
     const decodedToken = parseJwt(token);

@@ -19,6 +19,7 @@ router.post("/signup", async (req, res) => {
       email,
       // password: hashedPassword,
       password,
+      isAdmin: email === "anit@gmail.com" ? true : false,
     });
 
     const savedUser = await newUser.save();
@@ -49,6 +50,7 @@ router.post("/login", async (req, res) => {
     const userData = {
       id: user._id,
       email: user.email,
+      isAdmin: user.isAdmin,
     };
 
     //create token
@@ -63,7 +65,6 @@ router.post("/login", async (req, res) => {
       token: token,
       userData: userData,
     });
-
     // response.cookies.set("token", token, { httpOnly: true });
     return response;
   } catch (error) {
@@ -102,6 +103,7 @@ router.post("/googleLogin", async (req, res) => {
     const userData = {
       id: user._id,
       email: user.email,
+      isAdmin: false,
     };
 
     //create token

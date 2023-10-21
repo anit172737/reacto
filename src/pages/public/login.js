@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import img1 from "../../assets/images/1.png";
 import "../../sass/pages/public/login.scss";
 import { useForm, Controller } from "react-hook-form";
@@ -31,14 +31,20 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(baseUrl + "/login", data);
-      console.log("res", res);
+      console.log("res", res.data.userData);
       if (!res.data.error) {
         toast.success(res.data.message);
         setTimeout(() => {
-          navigate("/home");
+          if (res.data.userData?.isAdmin == true) {
+            navigate("/dashboard");
+          } else {
+            navigate("/home");
+          }
         }, 1000);
         // Cookies.set("token", res.data.token);
         // setInterval(() => {
+        // await setUser(res?.data?.userData);
+        localStorage.setItem("isAdmin", res.data.userData?.isAdmin);
         localStorage.setItem("token", res.data.token);
         // }, 1000);
       } else {

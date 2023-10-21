@@ -27,4 +27,35 @@ router.get("/javascript", async (req, res) => {
   }
 });
 
+//update question by id
+router.put("/javascript/:id", async (req, res) => {
+  try {
+    const question = await Interview.findbyIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json({
+      data: question,
+      status: 200,
+      message: "question updated successfully",
+    });
+  } catch (error) {
+    return res.json({ error: error.message, status: 400 });
+  }
+});
+
+//delete question by id
+router.delete("/javascript/:id", async (req, res) => {
+  try {
+    await Interview.findbyIdAndRemove(req.params.id);
+    res.json({
+      status: 204,
+      message: "Question deleted successfully",
+    });
+  } catch (error) {
+    res.json({ error: error.message, status: 404 });
+  }
+});
+
 module.exports = router;
