@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/users/userRoutes");
 const javascriptRoutes = require("./routes/interview/javascript/javascriptRoutes");
+const reactRoutes = require("./routes/interview/reactjs/reactjsRoutes");
 const app = express();
 // const bcryptjs = require("bcryptjs");
 const port = 8000;
@@ -13,8 +14,9 @@ app.use(cors());
 
 connect();
 
-app.use("/api", userRoutes);
-app.use("/interview", javascriptRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/javascript", javascriptRoutes);
+app.use("/api/react", reactRoutes);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

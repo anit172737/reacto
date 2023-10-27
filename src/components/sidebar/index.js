@@ -23,11 +23,6 @@ const Sidebar = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("data", data);
-    console.log("drop", drop);
-  }, [drop]);
-
   return (
     <div className="sidebar">
       <div className="sidebar__nav">

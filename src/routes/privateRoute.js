@@ -33,8 +33,6 @@ const PrivateRoute = (props) => {
     return false; // Token is not expired
   }
 
-  console.log("first", isTokenExpired(isAuthenticated));
-
   if (isAuthenticated && token) {
     return props.children;
     // localStorage.clear();

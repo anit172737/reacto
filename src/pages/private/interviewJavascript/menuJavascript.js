@@ -145,6 +145,13 @@ const Menu = [
     speaking: false,
     loading: false,
   },
+  {
+    question: "Difference between export default and export ?",
+    answer:
+      "export default is used to export a single value as the default export, while export with named exports is used to export multiple values as named exports.",
+    speaking: false,
+    loading: false,
+  },
 ];
 
 export default Menu;

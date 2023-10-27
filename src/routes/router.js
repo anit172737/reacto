@@ -24,6 +24,24 @@ const LazyInterviewCss = lazy(() => import("../pages/private/interviewCss"));
 const LazyInterviewHtml = lazy(() => import("../pages/private/interviewHtml"));
 
 const LazyDashboard = lazy(() => import("../pages/admin/dashboard"));
+const LazyInterviewJavascriptTable = lazy(() =>
+  import("../pages/admin/interview/javascript")
+);
+const LazyInterviewReactTable = lazy(() =>
+  import("../pages/admin/interview/react")
+);
+const LazyInterviewCssTable = lazy(() =>
+  import("../pages/admin/interview/css")
+);
+const LazyInterviewHtmlTable = lazy(() =>
+  import("../pages/admin/interview/html")
+);
+const LazyInterviewTypescriptTable = lazy(() =>
+  import("../pages/admin/interview/typescript")
+);
+const LazyInterviewNextjsTable = lazy(() =>
+  import("../pages/admin/interview/nextjs")
+);
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +79,23 @@ export const router = createBrowserRouter([
         <AdminLayout />
       </AdminRoute>
     ),
-    children: [{ element: <LazyDashboard />, path: "/dashboard" }],
+    children: [
+      { element: <LazyDashboard />, path: "/dashboard" },
+      {
+        element: <LazyInterviewJavascriptTable />,
+        path: "/interview-javascript-table",
+      },
+      { element: <LazyInterviewReactTable />, path: "/interview-react-table" },
+      { element: <LazyInterviewCssTable />, path: "/interview-css-table" },
+      { element: <LazyInterviewHtmlTable />, path: "/interview-html-table" },
+      {
+        element: <LazyInterviewTypescriptTable />,
+        path: "/interview-typescript-table",
+      },
+      {
+        element: <LazyInterviewNextjsTable />,
+        path: "/interview-nextjs-table",
+      },
+    ],
   },
 ]);

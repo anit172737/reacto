@@ -3,7 +3,7 @@ import { baseUrl } from "../app.config";
 import { toast, Toaster } from "react-hot-toast";
 
 const privateRequest = axios.create({
-  baseURL: baseUrl,
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 privateRequest.interceptors.request.use(

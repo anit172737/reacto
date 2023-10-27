@@ -51,24 +51,34 @@ const Menu = [
     dropIcon: <ChevronDown size={22} />,
     children: [
       {
-        url: "interview-html",
+        url: "interview-html-table",
         icon: <Layers size={18} />,
         navName: "HTML",
       },
       {
-        url: "interview-css",
+        url: "interview-css-table",
         icon: <Layers size={18} />,
         navName: "CSS",
       },
       {
-        url: "/interview-javascript",
+        url: "/interview-javascript-table",
         icon: <Layers size={18} />,
         navName: "Javascript",
       },
       {
-        url: "interview-react",
+        url: "interview-react-table",
         icon: <Layers size={18} />,
         navName: "React",
+      },
+      {
+        url: "interview-typescript-table",
+        icon: <Layers size={18} />,
+        navName: "Typescript",
+      },
+      {
+        url: "interview-nextjs-table",
+        icon: <Layers size={18} />,
+        navName: "NextJs",
       },
     ],
   },

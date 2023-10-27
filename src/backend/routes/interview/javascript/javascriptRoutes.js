@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Interview = require("../../../models/interviewModel");
+const Questions = require("../../../models/javascriptModel");
 
 //create new question
-router.post("/javascript", async (req, res) => {
+router.post("/questionjs", async (req, res) => {
   try {
-    const newQuestion = new Interview(req.body);
+    const newQuestion = new Questions(req.body);
     await newQuestion.save();
     return res.json({ message: "Question successfully added", status: 201 });
   } catch (error) {
@@ -14,9 +14,9 @@ router.post("/javascript", async (req, res) => {
 });
 
 //fetch questions
-router.get("/javascript", async (req, res) => {
+router.get("/questionjs", async (req, res) => {
   try {
-    const questions = await Interview.find();
+    const questions = await Questions.find();
     return res.json({
       data: questions,
       message: "Questions fetch successfully",
@@ -28,9 +28,9 @@ router.get("/javascript", async (req, res) => {
 });
 
 //update question by id
-router.put("/javascript/:id", async (req, res) => {
+router.put("/questionjs/:id", async (req, res) => {
   try {
-    const question = await Interview.findbyIdAndUpdate(
+    const question = await Questions.findbyIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -46,9 +46,9 @@ router.put("/javascript/:id", async (req, res) => {
 });
 
 //delete question by id
-router.delete("/javascript/:id", async (req, res) => {
+router.delete("/questionjs/:id", async (req, res) => {
   try {
-    await Interview.findbyIdAndRemove(req.params.id);
+    await Questions.findbyIdAndRemove(req.params.id);
     res.json({
       status: 204,
       message: "Question deleted successfully",

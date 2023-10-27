@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const interviewSchema = new mongoose.Schema({
+const reactModel = new mongoose.Schema({
   question: {
     type: String,
     required: [true, "please provide a question"],
@@ -11,7 +11,6 @@ const interviewSchema = new mongoose.Schema({
   },
 });
 
-const Interview =
-  mongoose.model.interviews || mongoose.model("interviews", interviewSchema);
+const ReactData = mongoose.model.react || mongoose.model("react", reactModel);
 
-module.exports = Interview;
+module.exports = ReactData;

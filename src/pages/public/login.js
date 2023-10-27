@@ -11,6 +11,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const Login = () => {
+  const [networkAvailable, setNetworkAvailable] = useState();
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
   const defaultValues = {
@@ -29,29 +30,32 @@ const Login = () => {
   } = useForm({ defaultValues });
 
   const onSubmit = async (data) => {
-    try {
-      const res = await axios.post(baseUrl + "/login", data);
-      console.log("res", res.data.userData);
-      if (!res.data.error) {
-        toast.success(res.data.message);
-        setTimeout(() => {
-          if (res.data.userData?.isAdmin == true) {
-            navigate("/dashboard");
-          } else {
-            navigate("/home");
-          }
-        }, 1000);
-        // Cookies.set("token", res.data.token);
-        // setInterval(() => {
-        // await setUser(res?.data?.userData);
-        localStorage.setItem("isAdmin", res.data.userData?.isAdmin);
-        localStorage.setItem("token", res.data.token);
-        // }, 1000);
-      } else {
-        toast.error(res.data.error);
+    if (networkAvailable) {
+      try {
+        const res = await axios.post(baseUrl + "/user/login", data);
+        if (!res.data.error) {
+          toast.success(res.data.message);
+          setTimeout(() => {
+            if (res.data.userData?.isAdmin == true) {
+              navigate("/dashboard");
+            } else {
+              navigate("/home");
+            }
+          }, 1000);
+          // Cookies.set("token", res.data.token);
+          // setInterval(() => {
+          // await setUser(res?.data?.userData);
+          localStorage.setItem("isAdmin", res.data.userData?.isAdmin);
+          localStorage.setItem("token", res.data.token);
+          // }, 1000);
+        } else {
+          toast.error(res.data.error);
+        }
+      } catch (error) {
+        toast.error(error.message);
       }
-    } catch (error) {
-      toast.error(error.message);
+    } else {
+      toast.error("Network issue!");
     }
   };
 
@@ -73,7 +77,13 @@ const Login = () => {
   useEffect(nav, []);
 
   useEffect(() => {
-    gapi.load("client:auth2", start);
+    if (networkAvailable) {
+      gapi.load("client:auth2", start);
+    }
+  }, []);
+
+  useEffect(() => {
+    setNetworkAvailable(navigator.onLine);
   }, []);
   return (
     <div className="form">

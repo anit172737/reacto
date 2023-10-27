@@ -6,15 +6,6 @@ import { Audio } from "react-loader-spinner";
 import { LoginContext } from "../utility/loginContext";
 
 const PrivateLayout = () => {
-  // const { setGoogleLogin, user } = useContext(LoginContext);
-  // console.log("user", user);
-  // useEffect(() => {
-  //   if (user !== "") {
-  //     setGoogleLogin(true);
-  //   } else {
-  //     setGoogleLogin(false);
-  //   }
-  // }, []);
   return (
     <div className="privateLayout">
       <div className="privateLayout_container">

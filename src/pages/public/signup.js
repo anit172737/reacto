@@ -29,9 +29,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.post(baseUrl + "/signup", data);
-      // console.log("user", user);
-      console.log("response", response.data);
+      const response = await axios.post(baseUrl + "/user/signup", data);
       if (!response.data.error) {
         toast.success(response.data.message, { duration: 1000 });
         setTimeout(() => {
