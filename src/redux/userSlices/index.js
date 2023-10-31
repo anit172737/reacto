@@ -3,15 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userMaster = createSlice({
   name: "userMaster",
   initialState: {
-    userList: [],
+    userData: [],
     search: "",
   },
   reducers: {
-    searchUser: (state, action) => {
-      state.search = action.payload;
+    handleLogin: (state, action) => {
+      state.userData = action.payload;
+      localStorage.setItem("isAdmin", action.payload.userData?.isAdmin);
+      localStorage.setItem("token", action.payload.token);
     },
   },
 });
 
-export const { searchUser } = userMaster.actions;
+export const { handleLogin } = userMaster.actions;
 export default userMaster.reducer;

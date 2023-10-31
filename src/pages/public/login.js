@@ -1,19 +1,23 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import img1 from "../../assets/images/1.png";
 import "../../sass/pages/public/login.scss";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { emailRegex, passwordRegex } from "../../utility/utils";
 import { toast, Toaster } from "react-hot-toast";
 import GoogleLoginBtn from "../../components/googleLoginBtn";
 import { gapi } from "gapi-script";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { handleLogin } from "../../redux/userSlices";
+import { baseUrl } from "../../app.config";
 
 const Login = () => {
   const [networkAvailable, setNetworkAvailable] = useState();
-  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+  const { userData } = useSelector((state) => state.userMaster);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const defaultValues = {
     email: "",
     password: "",
@@ -35,19 +39,19 @@ const Login = () => {
         const res = await axios.post(baseUrl + "/user/login", data);
         if (!res.data.error) {
           toast.success(res.data.message);
+          let data = {
+            userData: res.data.userData,
+            token: res.data.token,
+          };
+          await dispatch(handleLogin(data));
           setTimeout(() => {
-            if (res.data.userData?.isAdmin == true) {
+            if (userData.userData?.isAdmin == true) {
               navigate("/dashboard");
             } else {
               navigate("/home");
             }
           }, 1000);
           // Cookies.set("token", res.data.token);
-          // setInterval(() => {
-          // await setUser(res?.data?.userData);
-          localStorage.setItem("isAdmin", res.data.userData?.isAdmin);
-          localStorage.setItem("token", res.data.token);
-          // }, 1000);
         } else {
           toast.error(res.data.error);
         }
@@ -59,11 +63,11 @@ const Login = () => {
     }
   };
 
-  const nav = () => {
-    if (localStorage.getItem("token")) {
-      navigate("/home");
-    }
-  };
+  // const nav = () => {
+  //   if (localStorage.getItem("token")) {
+  //     navigate("/home");
+  //   }
+  // };
 
   const clientId =
     "1014433680425-9qjpd7cmkgtvhsdamvv762ploeb3baer.apps.googleusercontent.com";
@@ -74,7 +78,7 @@ const Login = () => {
     });
   };
 
-  useEffect(nav, []);
+  // useEffect(nav, []);
 
   useEffect(() => {
     if (networkAvailable) {

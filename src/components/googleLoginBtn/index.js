@@ -20,7 +20,7 @@ const GoogleLoginBtn = () => {
       email: res.profileObj.email,
     };
     try {
-      const response = await axios.post(baseUrl + "/googleLogin", data);
+      const response = await axios.post(baseUrl + "/user/googleLogin", data);
       if (!response.data.error) {
         navigate("/home");
         // Cookies.set("token", response.data.token);
