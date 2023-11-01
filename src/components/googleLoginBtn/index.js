@@ -25,6 +25,7 @@ const GoogleLoginBtn = () => {
         navigate("/home");
         // Cookies.set("token", response.data.token);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("isAdmin", "false");
         setGoogleLogin(true);
       } else {
         toast.error(response.data.error);

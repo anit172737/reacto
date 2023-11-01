@@ -45,7 +45,7 @@ const Login = () => {
           };
           await dispatch(handleLogin(data));
           setTimeout(() => {
-            if (userData.userData?.isAdmin == true) {
+            if (localStorage.getItem("isAdmin") === "true") {
               navigate("/dashboard");
             } else {
               navigate("/home");
@@ -63,11 +63,15 @@ const Login = () => {
     }
   };
 
-  // const nav = () => {
-  //   if (localStorage.getItem("token")) {
-  //     navigate("/home");
-  //   }
-  // };
+  const nav = () => {
+    if (localStorage.getItem("token")) {
+      if (localStorage.getItem("isAdmin") === "true") {
+        navigate("/dashboard");
+      } else {
+        navigate("/home");
+      }
+    }
+  };
 
   const clientId =
     "1014433680425-9qjpd7cmkgtvhsdamvv762ploeb3baer.apps.googleusercontent.com";
@@ -78,7 +82,9 @@ const Login = () => {
     });
   };
 
-  // useEffect(nav, []);
+  console.log("userData", userData);
+
+  useEffect(nav, []);
 
   useEffect(() => {
     if (networkAvailable) {
