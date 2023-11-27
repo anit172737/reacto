@@ -7,6 +7,7 @@ import AdminLayout from "../layouts/adminLayout";
 
 const LazyLogin = lazy(() => import("../pages/public/login"));
 const LazySignup = lazy(() => import("../pages/public/signup"));
+const LazyNotFound = lazy(() => import("../pages/public/not-found"));
 const LazyHome = lazy(() => import("../pages/private/home"));
 const LazyIntro = lazy(() => import("../pages/private/intro"));
 const LazyJsx = lazy(() => import("../pages/private/jsx"));
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <LazySignup />,
+  },
+  {
+    path: "*",
+    element: <LazyNotFound />,
   },
   {
     element: (
