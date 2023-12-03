@@ -7,7 +7,7 @@ router.post("/questionreact", async (req, res) => {
   try {
     const newQuestion = new Questions(req.body);
     await newQuestion.save();
-    return res.json({ message: "Question successfully added", status: 201 });
+    return res.json({ message: "Question added successfully", status: 201 });
   } catch (error) {
     return res.json({ error: error.message, status: 500 });
   }
@@ -38,7 +38,7 @@ router.put("/questionreact/:id", async (req, res) => {
     res.json({
       data: question,
       status: 200,
-      message: "question updated successfully",
+      message: "Question updated successfully",
     });
   } catch (error) {
     return res.json({ error: error.message, status: 400 });

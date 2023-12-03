@@ -12,8 +12,8 @@ const AdminLayout = () => {
         <div
           style={{
             display: "grid",
-            justifyItems: "center",
-            alignItems: "center",
+            padding: "0px 20px",
+            // alignItems: "center",
             boxShadow: "0 8px 25px -8px #82868b",
             borderRadius: "15px",
             backgroundColor: "white",

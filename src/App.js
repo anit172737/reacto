@@ -15,7 +15,6 @@ const App = () => {
       <div
         style={{
           display: "grid",
-          justifyContent: "center",
           alignItems: "center",
           height: "100vh",
         }}

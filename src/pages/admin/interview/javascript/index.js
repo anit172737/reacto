@@ -14,10 +14,12 @@ const JavascriptTable = () => {
       toast.error(error.message);
     }
   };
+
+  console.log("data", data);
   useEffect(() => {
     fetchData();
   }, []);
-  return <div>JavascriptTable</div>;
+  return <div>{data[0]?.question}</div>;
 };
 
 export default JavascriptTable;
