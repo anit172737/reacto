@@ -5,7 +5,10 @@ const Questions = require("../../../models/javascriptModel");
 //create new question
 router.post("/questionjs", async (req, res) => {
   try {
-    const newQuestion = new Questions(req.body);
+    const questions = await Questions.countDocuments();
+    const customId = questions;
+    const data = req.body;
+    const newQuestion = new Questions({ id: `${customId + 1}`, ...data });
     await newQuestion.save();
     return res.json({ message: "Question successfully added", status: 201 });
   } catch (error) {
@@ -16,7 +19,7 @@ router.post("/questionjs", async (req, res) => {
 //fetch questions
 router.get("/questionjs", async (req, res) => {
   try {
-    const questions = await Questions.find();
+    const questions = await Questions.find({}, { _id: 0 });
     return res.json({
       data: questions,
       message: "Questions fetch successfully",

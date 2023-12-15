@@ -1,7 +1,7 @@
 import React from "react";
 import "../../sass/components/header.scss";
 
-const AdminHeader = ({ title, setSearch }) => {
+const AdminHeader = ({ title, setSearch, handleAdd }) => {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
@@ -13,6 +13,12 @@ const AdminHeader = ({ title, setSearch }) => {
         type="input"
         placeholder="🔍 Search..."
         onChange={handleChange}
+      />
+      <input
+        className="header_addBtn"
+        type="button"
+        value="ADD"
+        onClick={handleAdd}
       />
     </div>
   );

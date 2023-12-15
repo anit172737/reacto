@@ -5,14 +5,22 @@
   @include container;
   gap: 20px;
 
+  &:first-child {
+    margin-top: -20px;
+  }
+
   &_sec {
-    // background-color: rgb(237, 237, 237);
-    background-color: $color-primary-light;
+    // background-color: $color-primary-light-1;
+    box-shadow: 0px 5px 10px $color-primary-light-1;
+    // box-shadow: 0px 5px 10px gray;
+    // border: 2px solid $color-primary-light-1;
+
     // background-image: linear-gradient(
     //   to left,
     //   $color-primary-light-1,
     //   rgb(237, 237, 237)
     // );
+
     border-radius: 10px;
     padding: 0px 20px 9px;
 
@@ -25,9 +33,10 @@
         grid-auto-flow: column;
         padding: 5px 5px;
         border-radius: 50px;
-        background-color: $color-primary-light-2;
+        background-color: $color-primary;
         width: max-content;
         justify-self: end;
+        color: white;
 
         &:hover {
           background-color: $color-primary-light-3;

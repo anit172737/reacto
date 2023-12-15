@@ -52,7 +52,6 @@ const GoogleLoginBtn = () => {
         cookiePolicy={"single_host_origin"}
         isSignedIn={true}
       />
-      <Toaster />
     </div>
   );
 };
