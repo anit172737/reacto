@@ -1,7 +1,7 @@
-// $color-primary: #6c63ff;
-$color-primary: #7e77fd;
-$color-primary-dark-1: #2f2e47;
-$color-primary-dark: #000065;
+$color-primary: #6c63ff;
+// $color-primary: #7e77fd;
+$color-primary-dark: #2f2e47;
+$color-primary-dark-1: #000065;
 // $color-primary-light: #e1e0fa;
 
 $color-primary-light: #f4ecff;
@@ -47,4 +47,14 @@ body {
   font-family: myFont;
   font-size: 2.5rem;
   color: $color-primary;
+}
+
+.react-dataTable {
+  border-radius: 10px !important;
+  box-shadow: 0px 5px 10px rgb(208, 208, 208) !important;
+  overflow: hidden;
+}
+
+.rdt_TableHeadRow {
+  border-bottom: 1px solid $color-primary !important;
 }

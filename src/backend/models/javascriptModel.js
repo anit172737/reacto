@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const interviewSchema = new mongoose.Schema({
+  id: {
+    type: String,
+  },
   question: {
     type: String,
     required: [true, "please provide a question"],

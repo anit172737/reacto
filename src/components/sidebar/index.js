@@ -7,6 +7,13 @@ import GoogleLogoutBtn from "../googleLogoutBtn";
 const Sidebar = () => {
   const [data, setData] = useState(Menu);
   const [drop, setDrop] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log("Logout Success!");
+    localStorage.clear();
+    navigate("/");
+  };
 
   const handleDrop = (name) => {
     for (let x in data) {
@@ -90,7 +97,13 @@ const Sidebar = () => {
         })}
       </div>
       <div className="sidebar_p">
-        <GoogleLogoutBtn />
+        {/* <GoogleLogoutBtn /> */}
+        <input
+          type="button"
+          value="Logout"
+          className="googleLogout"
+          onClick={handleLogout}
+        />
       </div>
     </div>
   );

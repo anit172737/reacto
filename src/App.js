@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router";
 import { LoginContext } from "./utility/loginContext";
 import { Audio } from "react-loader-spinner";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const [googleLogin, setGoogleLogin] = useState(false);
@@ -31,6 +32,7 @@ const App = () => {
           }
         >
           <RouterProvider router={router} />
+          <Toaster />
         </Suspense>
       </div>
     </LoginContext.Provider>

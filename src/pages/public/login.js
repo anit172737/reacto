@@ -10,8 +10,9 @@ import GoogleLoginBtn from "../../components/googleLoginBtn";
 import { gapi } from "gapi-script";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { handleLogin } from "../../redux/userSlices";
+import { handleLogin, showLoginToast } from "../../redux/userSlices";
 import { baseUrl } from "../../app.config";
+import { LoginApi } from "../../services/apiEndpoints";
 
 const Login = () => {
   const [networkAvailable, setNetworkAvailable] = useState();
@@ -36,21 +37,23 @@ const Login = () => {
   const onSubmit = async (data) => {
     if (networkAvailable) {
       try {
-        const res = await axios.post(baseUrl + "/user/login", data);
+        const res = await axios.post(baseUrl + LoginApi, data);
         if (!res.data.error) {
-          toast.success(res.data.message);
+          // toast.success(res.data.message);
           let data = {
             userData: res.data.userData,
             token: res.data.token,
           };
           await dispatch(handleLogin(data));
-          setTimeout(() => {
-            if (localStorage.getItem("isAdmin") === "true") {
-              navigate("/dashboard");
-            } else {
-              navigate("/home");
-            }
-          }, 1000);
+          // setTimeout(() => {
+          if (localStorage.getItem("isAdmin") === "true") {
+            navigate("/dashboard");
+            dispatch(showLoginToast(true));
+          } else {
+            navigate("/home");
+            dispatch(showLoginToast(true));
+          }
+          // }, 1000);
           // Cookies.set("token", res.data.token);
         } else {
           toast.error(res.data.error);
@@ -66,7 +69,7 @@ const Login = () => {
   const nav = () => {
     if (localStorage.getItem("token")) {
       if (localStorage.getItem("isAdmin") === "true") {
-        navigate("/dashboard");
+        navigate("/dashboard", { state: { from: window.location.pathname } });
       } else {
         navigate("/home");
       }
@@ -87,7 +90,7 @@ const Login = () => {
   useEffect(nav, []);
 
   useEffect(() => {
-    if (networkAvailable) {
+    if (networkAvailable && localStorage.getItem("isAdmin") !== "true") {
       gapi.load("client:auth2", start);
     }
   }, []);
@@ -190,8 +193,8 @@ const Login = () => {
               Register
             </button>
           </div>
-          <Toaster />
         </div>
+        <Toaster />
       </div>
     </div>
   );

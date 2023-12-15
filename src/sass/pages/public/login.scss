@@ -20,7 +20,7 @@
       display: grid;
       justify-content: center;
       align-content: center;
-      background-color: $color-primary-dark-1;
+      background-color: $color-primary-dark;
       border-top-left-radius: 2rem;
       border-bottom-left-radius: 2rem;
       // padding: 7rem 5rem;
@@ -203,20 +203,6 @@
   }
 }
 
-.googleLogout {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  div {
-    display: none !important;
-  }
-  span {
-    border: none !important;
-    color: white !important;
-    font-family: myFont !important;
-    font-size: 22px;
-    padding: 0px !important;
-  }
-}
 .toaster {
   font-family: myFont;
 }

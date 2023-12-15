@@ -1,27 +1,15 @@
-import React, { Suspense, useContext, useEffect } from "react";
+import React, { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import "../sass/layouts/privateLayout.scss";
 import Sidebar from "../components/sidebar";
 import { Audio } from "react-loader-spinner";
-import { LoginContext } from "../utility/loginContext";
 
 const PrivateLayout = () => {
   return (
     <div className="privateLayout">
       <div className="privateLayout_container">
         <Sidebar />
-        <div
-          style={{
-            display: "grid",
-            justifyItems: "center",
-            alignItems: "center",
-            boxShadow: "0 8px 25px -8px #82868b",
-            borderRadius: "15px",
-            backgroundColor: "white",
-            // backgroundColor: "#2f2e47",
-            overflow: "auto",
-          }}
-        >
+        <div className="privateLayout_container-outletSec">
           <Suspense
             fallback={
               <Audio

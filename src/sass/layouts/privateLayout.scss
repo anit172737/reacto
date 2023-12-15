@@ -23,5 +23,15 @@
     @media screen and (max-width: 770px) {
       grid-template-columns: 1fr;
     }
+
+    &-outletSec {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 8px 25px -8px #82868b;
+      border-radius: 15px;
+      background-color: white;
+      overflow: auto;
+    }
   }
 }

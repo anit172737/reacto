@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex } from "../../utility/utils";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
+import { SignUpApi } from "../../services/apiEndpoints";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -29,7 +30,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.post(baseUrl + "/user/signup", data);
+      const response = await axios.post(baseUrl + SignUpApi, data);
       if (!response.data.error) {
         toast.success(response.data.message, { duration: 1000 });
         setTimeout(() => {
@@ -144,7 +145,6 @@ const Signup = () => {
               Login
             </button>
           </div>
-          <Toaster />
         </div>
       </div>
     </div>

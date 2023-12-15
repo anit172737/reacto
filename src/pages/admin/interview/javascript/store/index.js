@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseUrl } from "../../app.config";
-import { JavascriptFetch } from "../../services/apiEndpoints";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { baseUrl } from "../../../../../app.config";
+import { JavascriptFetch } from "../../../../../services/apiEndpoints";
 
 export const fetchJsQtnList = createAsyncThunk(
   "javascriptMaster",
@@ -12,6 +12,16 @@ export const fetchJsQtnList = createAsyncThunk(
       return {
         jsQtnList: response.data.data,
       };
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
+
+export const addJsQtn = createAsyncThunk(
+  "javascriptMaster",
+  async (params, { dispatch }) => {
+    try {
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }

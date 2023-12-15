@@ -5,17 +5,17 @@ import { useNavigate } from "react-router-dom";
 import "../../sass/pages/public/login.scss";
 
 const GoogleLogoutBtn = () => {
-  const { setGoogleLogin, setUser, googleLogoutRef } = useContext(LoginContext);
+  // const { setGoogleLogin, setUser, googleLogoutRef } = useContext(LoginContext);
   const navigate = useNavigate();
   const clientId =
     "1014433680425-9qjpd7cmkgtvhsdamvv762ploeb3baer.apps.googleusercontent.com";
 
   const onSuccess = (res) => {
     console.log("Logout Success!");
-    setUser("");
+    // setUser("");
     localStorage.clear();
     navigate("/");
-    setGoogleLogin(false);
+    // setGoogleLogin(false);
   };
 
   return (
@@ -25,7 +25,7 @@ const GoogleLogoutBtn = () => {
         buttonText="Logout"
         onLogoutSuccess={onSuccess}
         className="googleLogout"
-        ref={googleLogoutRef}
+        // ref={googleLogoutRef}
       />
     </>
   );
