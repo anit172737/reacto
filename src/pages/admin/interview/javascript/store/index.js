@@ -22,6 +22,7 @@ export const addJsQtn = createAsyncThunk(
   "javascriptMaster",
   async (params, { dispatch }) => {
     try {
+      console.log('params', params)
       await axios.post(baseUrl + JavascriptFetch, params)
       toast.success('Question added successfully')
       dispatch(fetchJsQtnList())
@@ -46,7 +47,7 @@ const javascriptMaster = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchJsQtnList.fulfilled, (state, action) => {
       state.jsQtnList = action.payload.jsQtnList;
-    });
+    })
   },
 });
 

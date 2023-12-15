@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import "../../../../sass/pages/admin/form.scss";
 
 import { Button, Col, Form, FormFeedback, Input, Label, Row } from "reactstrap";
+import { addJsQtn } from "./store";
 // import { addContact, editContact, selectContact, setLoader } from "./store";
 
 const defaultValues = {
@@ -34,7 +35,10 @@ const AddForm = ({ setOpenForm }) => {
 
   const onSubmit = async (data) => {
     console.log("data", data);
+
     let response = "";
+
+    await dispatch(addJsQtn(data))
     // if (selected) {
     // await dispatch(setLoader(true));
 
