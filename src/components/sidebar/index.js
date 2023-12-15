@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../sass/components/sidebar.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import Menu from "./sidebarMenu";
 import GoogleLogoutBtn from "../googleLogoutBtn";
+import { LoginContext } from "../../utility/loginContext";
 
 const Sidebar = () => {
+  const { user } = useContext(LoginContext)
+  const googleLogin = localStorage.getItem('googleLogin')
   const [data, setData] = useState(Menu);
   const [drop, setDrop] = useState(false);
   const navigate = useNavigate();
+  console.log('user', user)
 
   const handleLogout = () => {
     console.log("Logout Success!");
@@ -97,13 +101,14 @@ const Sidebar = () => {
         })}
       </div>
       <div className="sidebar_p">
-        {/* <GoogleLogoutBtn /> */}
-        <input
+        {googleLogin === 'yes' ? <GoogleLogoutBtn />:<input
           type="button"
           value="Logout"
           className="googleLogout"
           onClick={handleLogout}
-        />
+        />}
+        
+        
       </div>
     </div>
   );

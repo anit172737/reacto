@@ -84,13 +84,13 @@ const AddForm = ({ setOpenForm }) => {
       <div className="addModal__content">
         <div className="addModal__content--header">
           {/* <h2 className="mb-0">{selected ? "Edit" : "Add"} Contact</h2> */}
-          <h2>Add Question</h2>
+          <h2 className="addModal__content--header-h2">Add Question</h2>
         </div>
 
         <Row tag={Form} className="p-2" onSubmit={handleSubmit(onSubmit)}>
           <Col xs={12} className="addModal__content--body">
             <div className="addModal__content--input">
-              <Label className="form-label" for="question">
+              <Label className="form-label addModal__content--input-label" for="question">
                 Question <span style={{ color: "orangered" }}>*</span>
               </Label>
               <Controller
@@ -114,14 +114,14 @@ const AddForm = ({ setOpenForm }) => {
                 )}
               />
               {errors && errors.question && (
-                <FormFeedback style={{ color: "orangered" }}>
+                <div style={{ color: "orangered",fontSize:'17px' }}>
                   {errors.question.message}
-                </FormFeedback>
+                </div>
               )}
             </div>
 
             <div className="addModal__content--input">
-              <Label className="form-label" for="answer">
+              <Label className="form-label addModal__content--input-label" for="answer">
                 Answer <span style={{ color: "orangered" }}>*</span>
               </Label>
               <Controller
@@ -145,9 +145,9 @@ const AddForm = ({ setOpenForm }) => {
                 )}
               />
               {errors && errors.answer && (
-                <FormFeedback style={{ color: "orangered" }}>
+                <div style={{ color: "orangered", fontSize:'17px' }}>
                   {errors.answer.message}
-                </FormFeedback>
+                </div>
               )}
             </div>
           </Col>

@@ -22,6 +22,10 @@ export const addJsQtn = createAsyncThunk(
   "javascriptMaster",
   async (params, { dispatch }) => {
     try {
+      await axios.post(baseUrl + JavascriptFetch, params)
+      toast.success('Question added successfully')
+      dispatch(fetchJsQtnList())
+      return true
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }

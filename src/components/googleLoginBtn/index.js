@@ -15,6 +15,7 @@ const GoogleLoginBtn = () => {
 
   const onSuccess = async (res) => {
     console.log("Login Success!", res.profileObj);
+    localStorage.setItem('googleLogin', 'yes')
     setUser(res.profileObj.email);
     const data = {
       email: res.profileObj.email,

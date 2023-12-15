@@ -32,6 +32,9 @@
       display: grid;
       grid-auto-flow: column;
       justify-content: center;
+      &-h2{
+        color: $color-primary-dark;
+      }
     }
 
     &--body {
@@ -48,11 +51,15 @@
         max-width: 450px;
         width: 400px;
         min-height: 45px;
-        border: 1px solid $color-primary-dark;
+        border: 2px solid $color-primary-light-1;
         padding: 0px 10px;
         border-radius: 10px;
         font-family: myFont;
         font-size: 20px;
+      }
+
+      &-label{
+        color: $color-primary-dark;
       }
     }
 
