@@ -5,14 +5,17 @@ import toast from "react-hot-toast";
 import "../../../../sass/pages/admin/form.scss";
 
 import { Button, Col, Form, FormFeedback, Input, Label, Row } from "reactstrap";
-import { addJsQtn } from "./store";
+import { addJsQtn, setOpenForm, setSelecetd, jsQtnList, editJsQtn } from "./store";
 // import { addContact, editContact, selectContact, setLoader } from "./store";
 
 const defaultValues = {
   question: "",
   answer: "",
 };
-const AddForm = ({ setOpenForm }) => {
+const AddForm = () => {
+  const { selected, openForm,jsQtnList } = useSelector(state => state.javascriptMaster)
+  console.log('selected', selected)
+  // console.log('openForm', openForm)
   // const { selected, contactList } = useSelector(
   //   (state) => state?.contactMaster
   // );
@@ -28,7 +31,8 @@ const AddForm = ({ setOpenForm }) => {
   } = useForm({ defaultValues });
 
   const handleModalClosed = () => {
-    setOpenForm(false);
+    dispatch(setOpenForm(false));
+    dispatch(setSelecetd(null))
     reset();
     // dispatch(selectContact(null));
   };
@@ -38,49 +42,45 @@ const AddForm = ({ setOpenForm }) => {
 
     let response = "";
 
-    await dispatch(addJsQtn(data))
-    // if (selected) {
-    // await dispatch(setLoader(true));
-
-    // const modifiedArray = contactList.map((obj) => {
-    //   if (obj.id === data.id) {
+    
+    if (selected) {
+      // await dispatch(setLoader(true));
+      // const arr = jsQtnList.filter(e => e.id === selected.id)
+      const modify = {
+        id:selected.id,
+        question: data.question,
+        answer:data.answer
+      }
+    // const modifiedArray = jsQtnList.map((obj) => {
+    //   if (obj.id === selected.id) {
     //     return {
     //       ...obj,
-    //       firstName: data.firstName,
-    //       lastName: data.lastName,
-    //       status: data.status,
+    //       question: data.question,
+    //       answer: data.answer
     //     };
     //   }
     //   return obj;
     // });
 
-    // response = await dispatch(editContact(modifiedArray));
-    //   toast.success("Contact Edited Successfully");
-    // } else {
+    response = await dispatch(editJsQtn(modify));
+      // toast.success("Question Edited Successfully",{id:data?.question});
+    } else {
     // await dispatch(setLoader(true));
-    // response = await dispatch(
-    //   addContact({
-    //     id: contactList.length + 1,
-    //     firstName: data.firstName,
-    //     lastName: data.lastName,
-    //     status: data.status,
-    //   })
-    // );
-    //   toast.success("Contact Added Successfully");
-    // }
+    response = await dispatch(addJsQtn(data))
+      // toast.success("Question Added Successfully",{id:data?.question});
+    }
     if (response) {
       handleModalClosed();
     }
-    handleModalClosed();
   };
 
   useEffect(() => {
-    // if (selected) {
-    //   setValue("id", selected.id);
-    //   setValue("firstName", selected.firstName);
-    //   setValue("lastName", selected.lastName);
-    //   setValue("status", selected.status);
-    // }
+    if (selected) {
+      // setValue("id", selected.id);
+      setValue("question", selected.question);
+      setValue("answer", selected.answer);
+      // setValue("status", selected.status);
+    }
   }, []);
 
   return (
@@ -88,7 +88,7 @@ const AddForm = ({ setOpenForm }) => {
       <div className="addModal__content">
         <div className="addModal__content--header">
           {/* <h2 className="mb-0">{selected ? "Edit" : "Add"} Contact</h2> */}
-          <h2 className="addModal__content--header-h2">Add Question</h2>
+          <h2 className="addModal__content--header-h2">{selected ? 'Edit': 'Add'} Question</h2>
         </div>
 
         <Row tag={Form} className="p-2" onSubmit={handleSubmit(onSubmit)}>
@@ -162,7 +162,7 @@ const AddForm = ({ setOpenForm }) => {
             </Button>
             <button
               className="addModal__content--footer-btn addModal__content--footer-btn-close"
-              onClick={() => setOpenForm(false)}
+              onClick={handleModalClosed}
             >
               Close
             </button>

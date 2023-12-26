@@ -22,7 +22,7 @@ export const addJsQtn = createAsyncThunk(
   "javascriptMaster",
   async (params, { dispatch }) => {
     try {
-      console.log('params', params)
+      
       await axios.post(baseUrl + JavascriptFetch, params)
       toast.success('Question added successfully')
       dispatch(fetchJsQtnList())
@@ -33,15 +33,39 @@ export const addJsQtn = createAsyncThunk(
   }
 );
 
+export const editJsQtn = createAsyncThunk(
+  "javascriptMaster",
+  async (params, { dispatch }) => {
+    try {
+      console.log('params', params)
+     const response= await axios.put(baseUrl + JavascriptFetch + `/${params.id}`, params).then(res=>res.data.error ? toast.error(res.data.error): toast.success(res.data.message))
+      // toast.success('Question edited successfully')
+      console.log('response', response)
+      dispatch(fetchJsQtnList())
+      return true
+    } catch (error) {
+      toast.error(error?.response?.data?.error);
+    }
+  }
+);
+
 const javascriptMaster = createSlice({
   name: "javascriptMaster",
   initialState: {
     jsQtnList: [],
     search: "",
+    selected: null,
+    openForm: false
   },
   reducers: {
     setSearch: (state, action) => {
       state.search = action.payload;
+    },
+    setSelecetd: (state, action) => {
+      state.selected = action.payload
+    },
+    setOpenForm: (state, action) => {
+      state.openForm = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -51,6 +75,6 @@ const javascriptMaster = createSlice({
   },
 });
 
-export const { setSearch } = javascriptMaster.actions;
+export const { setSearch, setSelecetd, setOpenForm } = javascriptMaster.actions;
 
 export default javascriptMaster.reducer;

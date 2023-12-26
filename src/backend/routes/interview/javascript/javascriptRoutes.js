@@ -19,6 +19,7 @@ router.post("/questionjs", async (req, res) => {
 //fetch questions
 router.get("/questionjs", async (req, res) => {
   try {
+    
     const questions = await Questions.find({}, { _id: 0 });
     return res.json({
       data: questions,
@@ -33,11 +34,13 @@ router.get("/questionjs", async (req, res) => {
 //update question by id
 router.put("/questionjs/:id", async (req, res) => {
   try {
-    const question = await Questions.findbyIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const itemId = parseInt(req.params.id);
+    const Question = await Questions.find(question =>
+      question.id === req.params.id)
+      
+    Question.question = req.body.question
+    Question.answer = req.body.answer
+ 
     res.json({
       data: question,
       status: 200,

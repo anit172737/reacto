@@ -60,6 +60,7 @@
 
       &-label{
         color: $color-primary-dark;
+        font-weight: 600;
       }
     }
 
@@ -73,7 +74,7 @@
       &-btn {
         height: 40px;
         width: 100px;
-        background-color: $color-primary;
+        background-color: $color-primary !important;
         color: white;
         border-radius: 10px !important;
         border: none;
@@ -82,7 +83,7 @@
         font-size: 18px;
 
         &-close {
-          background-color: white;
+          background-color: white !important;
           border: 2px solid $color-primary;
           color: $color-primary;
         }
