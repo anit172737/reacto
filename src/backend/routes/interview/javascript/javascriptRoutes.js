@@ -42,7 +42,7 @@ router.put("/questionjs/:id", async (req, res) => {
     Question.answer = req.body.answer
  
     res.json({
-      data: question,
+      data: Question,
       status: 200,
       message: "question updated successfully",
     });
